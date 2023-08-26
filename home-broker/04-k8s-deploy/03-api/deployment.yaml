@@ -41,7 +41,7 @@ kind: Deployment
 metadata: 
   name: api
 spec:
-  replicas: 1
+  replicas: 10
   selector:
     matchLabels:
       app: api
@@ -49,6 +49,10 @@ spec:
     metadata:
       labels:
         app: api
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "3000"
+        prometheus.io/path: "/metrics"
     spec:
       containers:
         - name: trader-api
